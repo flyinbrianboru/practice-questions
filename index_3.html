@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ga">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obair Bhaile — IRS139</title>
+<meta name="description" content="Practice bank built from the IRS139 homework sheets: questions, relatives, prepositions, conditionals.">
+<style>
+:root{
+  --bg:#f7f4ed; --panel:#fffdf8; --ink:#1d2320; --soft:#5e6a62; --faint:#8b958e;
+  --line:#e1dccf; --line2:#efeae0;
+  --accent:#14362b; --accent2:#2f6b52; --gold:#9a6b1f; --gold-bg:#fbf3e2;
+  --ok:#2f6b52; --ok-bg:#e8f2ec; --no:#9d3a2f; --no-bg:#fbeae7;
+  --warn:#8a5a09; --warn-bg:#fbf1dd;
+  --btnink:#fffdf8;
+  --shadow:0 1px 2px rgba(29,35,32,.05), 0 6px 20px rgba(29,35,32,.05);
+  --r:14px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#13161a; --panel:#1b1f24; --ink:#e8e9e6; --soft:#a3aca6; --faint:#78827c;
+  --line:#2b3138; --line2:#242a30;
+  --accent:#9fd4bb; --accent2:#7bbfa2; --gold:#d9b069; --gold-bg:#2a2317;
+  --ok:#7bbfa2; --ok-bg:#1c2a23; --no:#e0897c; --no-bg:#2c1d1b;
+  --warn:#dcb06a; --warn-bg:#2a2316; --btnink:#12171a;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+}}
+:root[data-theme="dark"]{
+  --bg:#13161a; --panel:#1b1f24; --ink:#e8e9e6; --soft:#a3aca6; --faint:#78827c;
+  --line:#2b3138; --line2:#242a30;
+  --accent:#9fd4bb; --accent2:#7bbfa2; --gold:#d9b069; --gold-bg:#2a2317;
+  --ok:#7bbfa2; --ok-bg:#1c2a23; --no:#e0897c; --no-bg:#2c1d1b;
+  --warn:#dcb06a; --warn-bg:#2a2316; --btnink:#12171a;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px 90px}
+header{border-bottom:1px solid var(--line);background:var(--panel)}
+.hd{max-width:920px;margin:0 auto;padding:16px 16px 0;display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--serif);font-size:1.5rem;margin:0;font-weight:600;flex:1;min-width:190px;letter-spacing:-.01em}
+h1 span{color:var(--accent2)}
+.sub{color:var(--soft);font-size:.85rem;margin:2px 0 0}
+h2{font-family:var(--serif);font-size:1.2rem;margin:26px 0 10px;font-weight:600}
+h3{font-size:.98rem;margin:16px 0 6px;font-weight:650}
+h4{font-size:.9rem;margin:14px 0 4px;font-weight:650;color:var(--accent2)}
+.stats{max-width:920px;margin:0 auto;padding:10px 16px 0;display:flex;gap:7px 14px;flex-wrap:wrap;font-size:.8rem;color:var(--soft)}
+.stats b{color:var(--ink);font-variant-numeric:tabular-nums}
+.stats .y{color:var(--ok)}.stats .n{color:var(--no)}
+.rs{appearance:none;-webkit-appearance:none;border:0;background:none;font:inherit;font-size:.78rem;color:var(--faint);cursor:pointer;text-decoration:underline;padding:0;margin:0}
+.rs:hover{color:var(--ink)}
+nav{max-width:920px;margin:0 auto;padding:10px 16px 0;display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav button{appearance:none;border:0;background:none;font:inherit;font-size:.9rem;color:var(--soft);padding:9px 13px;border-radius:9px 9px 0 0;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent}
+nav button:hover{color:var(--ink);background:var(--line2)}
+nav button[aria-selected="true"]{color:var(--accent2);border-bottom-color:var(--accent2);font-weight:600}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:16px 0;box-shadow:var(--shadow)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.lbl{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:4px;font-weight:600}
+select,input[type=text],input[type=search]{font:inherit;font-size:.92rem;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%;min-width:0}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent2);outline-offset:1px}
+.btn{appearance:none;font:inherit;font-size:.92rem;font-weight:600;padding:9px 16px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--btnink);cursor:pointer}
+.btn.alt{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.btn.sm{padding:6px 11px;font-size:.84rem}
+.btn:disabled{opacity:.45;cursor:default}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 0}
+.chip{appearance:none;font:inherit;font-size:.8rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--soft);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--btnink);font-weight:600}
+.chip .ct{font-size:.72rem;opacity:.7;font-variant-numeric:tabular-nums}
+.ga{font-family:var(--serif);font-size:1.05rem}
+.en{color:var(--soft)}
+.note{font-size:.88rem;color:var(--soft);background:var(--bg);border-left:3px solid var(--line);padding:9px 12px;border-radius:0 8px 8px 0;margin:9px 0 0}
+.flag{font-size:.86rem;background:var(--warn-bg);color:var(--warn);border-left:3px solid var(--warn);padding:9px 12px;border-radius:0 8px 8px 0;margin:9px 0 0}
+.meter{height:5px;background:var(--line2);border-radius:999px;overflow:hidden;margin:12px 0}
+.meter i{display:block;height:100%;background:var(--accent2);width:0;transition:width .25s}
+.fb{padding:10px 13px;border-radius:10px;font-size:.92rem;margin:10px 0 0}
+.fb.y{background:var(--ok-bg);color:var(--ok)}
+.fb.n{background:var(--no-bg);color:var(--no)}
+.fb.w{background:var(--warn-bg);color:var(--warn)}
+.slip{margin:7px 0 0;font-size:.88rem;color:var(--soft);display:flex;gap:6px 14px;flex-wrap:wrap}
+.slip s{color:var(--no);opacity:.8}
+.slip b{font-family:var(--serif);color:var(--ok);font-size:1rem}
+.sess{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sess .y{color:var(--ok)}.sess .n{color:var(--no)}
+.tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);border:1px solid var(--line);padding:1px 7px;border-radius:999px;white-space:nowrap}
+.tag.hw{color:var(--gold);border-color:var(--gold)}
+.ent{border-bottom:1px solid var(--line2);padding:11px 0}
+.ent:last-child{border-bottom:0}
+.ent .hdr{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;cursor:pointer}
+.ent .hdr .q{flex:1;min-width:150px}
+.ent .a{font-family:var(--serif);color:var(--accent2);font-size:1.02rem;margin-top:3px}
+details{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);margin:10px 0;overflow:hidden;box-shadow:var(--shadow)}
+details>summary{padding:13px 16px;cursor:pointer;font-weight:600;font-family:var(--serif);font-size:1.05rem;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"＋";color:var(--accent2);margin-right:9px;font-weight:400}
+details[open]>summary::before{content:"－"}
+details>summary .s{display:block;font-family:var(--sans);font-size:.78rem;font-weight:400;color:var(--faint);margin-top:1px}
+details>div{padding:0 16px 14px}
+details p{margin:8px 0}
+details .ex{font-family:var(--serif);background:var(--bg);padding:9px 12px;border-radius:9px;font-size:1rem;line-height:1.7}
+details .tip{background:var(--ok-bg);color:var(--ok);padding:9px 12px;border-radius:9px;font-size:.88rem;margin:10px 0}
+details .warn{background:var(--warn-bg);color:var(--warn);padding:9px 12px;border-radius:9px;font-size:.88rem;margin:10px 0}
+details .tip b,details .warn b{color:inherit}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
+table{border-collapse:collapse;width:100%;min-width:400px;font-size:.9rem}
+th,td{text-align:left;padding:6px 10px 6px 0;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);border-bottom:1px solid var(--line)}
+td.sep{border:0;height:5px;padding:0}
+.m{color:var(--faint);font-size:.85em}
+.bar{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2)}
+.bar:last-child{border-bottom:0}
+.bar .nm{width:168px;flex-shrink:0;font-size:.9rem}
+.bar .nm span{display:block;font-size:.74rem;color:var(--faint)}
+.bar .tr{flex:1;height:9px;background:var(--line2);border-radius:999px;overflow:hidden;min-width:60px}
+.bar .tr i{display:block;height:100%;border-radius:999px}
+.bar .pc{width:86px;text-align:right;font-size:.82rem;color:var(--soft);font-variant-numeric:tabular-nums;flex-shrink:0}
+.big{font-size:1.9rem;font-family:var(--serif);font-variant-numeric:tabular-nums}
+.muted{color:var(--faint);font-size:.84rem}
+.src{font-size:.74rem;color:var(--faint);margin-top:8px}
+ul{padding-left:20px;margin:6px 0}
+@media(max-width:560px){
+  h1{font-size:1.3rem}.wrap{padding-bottom:70px}
+  .bar .nm{width:120px}.bar .pc{width:72px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd">
+    <div style="flex:1;min-width:190px">
+      <h1>Obair <span>Bhaile</span></h1>
+      <p class="sub">IRS139 · Gaeilge Uladh · ceisteanna ó na bileoga agus cinn bhreise</p>
+    </div>
+    <button class="btn alt sm" id="theme">◐ Téama</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <nav id="nav" role="tablist">
+    <button role="tab" data-tab="cleacht" aria-selected="true">Cleachtadh</button>
+    <button role="tab" data-tab="liosta" aria-selected="false">Ceisteanna</button>
+    <button role="tab" data-tab="notai" aria-selected="false">Nótaí</button>
+    <button role="tab" data-tab="scor" aria-selected="false">Scór</button>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<section id="cleacht">
+  <div class="panel">
+    <label class="lbl">Ábhair — roghnaigh ceann amháin nó níos mó</label>
+    <div class="chips" id="tChips"></div>
+    <div class="row" style="margin-top:14px">
+      <div style="flex:1;min-width:120px">
+        <label class="lbl" for="qLen">Fad</label>
+        <select id="qLen">
+          <option value="10">10 gceist</option>
+          <option value="20" selected>20 ceist</option>
+          <option value="0">Gach ceann</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:160px">
+        <label class="lbl" for="strict">Déine</label>
+        <select id="strict">
+          <option value="soft" selected>Bog — glac le botún beag</option>
+          <option value="hard">Dian — sínte fada san áireamh</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:140px">
+        <label class="lbl" for="src">Foinse</label>
+        <select id="src">
+          <option value="all" selected>Uile</option>
+          <option value="hw">Obair bhaile amháin</option>
+          <option value="new">Ceisteanna breise</option>
+        </select>
+      </div>
+      <div><button class="btn" id="qStart">Tosaigh</button></div>
+    </div>
+    <p class="muted" style="margin:10px 0 0" id="qHint"></p>
+  </div>
+  <div id="qArea"></div>
+</section>
+
+<section id="liosta" hidden>
+  <div class="panel">
+    <label class="lbl" for="fQ">Cuardaigh</label>
+    <input type="search" id="fQ" placeholder="Béarla, Gaeilge nó nóta…" autocomplete="off">
+    <div class="chips" id="fChips"></div>
+  </div>
+  <p class="muted" id="fCount"></p>
+  <div class="panel" id="fList"></div>
+</section>
+
+<section id="notai" hidden><div id="nList"></div></section>
+
+<section id="scor" hidden><div id="sList"></div></section>
+
+</div>
+
+<script src="ceisteanna.js"></script>
+<script src="notai.js"></script>
+<script>
+(function(){
+"use strict";
+var TOPICS=window.TOPICS, Q=window.Q, NOTAI=window.NOTAI;
+Q.forEach(function(x,i){ x.id = x.topic+"|"+i; });
+
+/* ---------- storage ---------- */
+var KEY="obair-irs139-v1";
+var S={items:{},day:null,right:0,wrong:0};
+try{var r=localStorage.getItem(KEY); if(r){var p=JSON.parse(r); if(p&&typeof p==="object"){S=Object.assign(S,p); S.items=S.items||{};}}}catch(e){}
+S.right=S.right||0; S.wrong=S.wrong||0;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+if(S.day!==today()){S.day=today();S.right=0;S.wrong=0;save();}
+function rec(id,ok){var x=S.items[id]||(S.items[id]={ok:0,no:0}); if(ok){x.ok++;S.right++;}else{x.no++;S.wrong++;} save();}
+
+/* ---------- theme ---------- */
+var tb=document.getElementById("theme");
+try{var th=localStorage.getItem(KEY+"-theme"); if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}
+tb.onclick=function(){
+  var cur=document.documentElement.getAttribute("data-theme");
+  var dark=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;
+  var next=cur?(cur==="dark"?"light":"dark"):(dark?"light":"dark");
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem(KEY+"-theme",next);}catch(e){}
+};
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function norm(s){return String(s).toLowerCase()
+  .replace(/[‘’ʼ]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,"-")
+  .replace(/[.,!?;:"]/g,"").replace(/\s+/g," ").trim();}
+var FADA={"á":"a","é":"e","í":"i","ó":"o","ú":"u"};
+function strip(s){return norm(s).replace(/[áéíóú]/g,function(c){return FADA[c];});}
+function lev(a,b){
+  if(a===b)return 0; var m=a.length,n=b.length; if(!m)return n; if(!n)return m;
+  var prev=[],cur=[],i,j; for(j=0;j<=n;j++)prev[j]=j;
+  for(i=1;i<=m;i++){cur[0]=i;
+    for(j=1;j<=n;j++) cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a.charAt(i-1)===b.charAt(j-1)?0:1));
+    for(j=0;j<=n;j++) prev[j]=cur[j];}
+  return prev[n];
+}
+/* prepositional pronouns: swapping one for another is a meaning error, never a typo */
+var PRONSET={};
+("orm ort air uirthi orainn oraibh orthu agam agat aige aici againn agaibh acu "+
+ "asam asat aisti asainn asaibh astu liom leat leis léi linn libh leo "+
+ "fúm fút fúithi fúinn fúibh fúthu romham romhat roimhe roimpi romhainn romhaibh rompu "+
+ "ionam ionat ann inti ionainn ionaibh iontu díom díot di dínn díbh díobh "+
+ "dom domh duit dó dúinn daoibh dóibh daofa uaim uait uaidh uaithi uainn uaibh uathu "+
+ "chugam chugat chuige chuici chugainn chugaibh chucu").split(" ").forEach(function(w){PRONSET[w]=1;});
+function wordSlips(g,a){var x=norm(g).split(" "),y=norm(a).split(" "),o=[];
+  if(x.length!==y.length)return null;
+  for(var i=0;i<y.length;i++) if(x[i]!==y[i]) o.push([x[i],y[i]]);
+  return o.length?o:null;}
+function check(given,it){
+  var g=norm(given); if(!g) return {v:"no"};
+  var pool=[it.a].concat(it.alts||[]),i,j,a,ps;
+  for(i=0;i<pool.length;i++){ a=norm(pool[i]);
+    if(g===a) return {v:"ok"};
+    if(a.indexOf("/")>-1){ps=a.split(/\s*\/\s*/); for(j=0;j<ps.length;j++) if(g===ps[j].trim()) return {v:"ok"};}}
+  var sg=strip(g);
+  for(i=0;i<pool.length;i++) if(sg===strip(pool[i]))
+    return {v:"near",why:"fada",match:pool[i],slips:wordSlips(given,pool[i])};
+  var best=pool[0],bd=99;
+  for(i=0;i<pool.length;i++){var d=lev(g,norm(pool[i])); if(d<bd){bd=d;best=pool[i];}}
+  var nb=norm(best);
+  if(nb.indexOf(" ")>-1){
+    var tol=Math.min(3,Math.max(1,Math.round(nb.length*0.12)));
+    var sl=wordSlips(given,best);
+    var swap = sl && sl.some(function(s){return PRONSET[s[0]]&&PRONSET[s[1]];});
+    if(bd<=tol && !swap) return {v:"near",why:"litriu",match:best,slips:sl};
+  }
+  return {v:"no"};
+}
+function slipHTML(sl){ if(!sl||!sl.length) return "";
+  return "<div class='slip'>"+sl.map(function(s){return "<span><s>"+esc(s[0])+"</s> → <b>"+esc(s[1])+"</b></span>";}).join("")+"</div>"; }
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function sess(r,w){return "<span class='sess'><b class='y'>✓ "+r+"</b> · <b class='n'>✗ "+w+"</b></span>";}
+var KEYS=Object.keys(TOPICS);
+function tName(k){return TOPICS[k]?TOPICS[k].name:k;}
+
+/* ---------- stats ---------- */
+function drawStats(){
+  var done=Object.keys(S.items).length, tot=S.right+S.wrong;
+  document.getElementById("stats").innerHTML=
+    "<span><b>"+Q.length+"</b> ceist · <b>"+Q.filter(function(x){return x.hw;}).length+"</b> ón obair bhaile</span>"+
+    "<span><b>"+done+"</b> triailte</span>"+
+    "<span>Inniu: <b class='y'>"+S.right+"</b> ceart · <b class='n'>"+S.wrong+"</b> mícheart"+
+      (tot?" · <b>"+Math.round(S.right/tot*100)+"%</b>":"")+"</span>"+
+    (tot?"<button class='rs' id='rsDay'>glan an lá</button>":"");
+  var b=document.getElementById("rsDay");
+  if(b) b.onclick=function(){S.right=0;S.wrong=0;save();drawStats();};
+}
+
+/* ---------- tabs ---------- */
+var TABS=["cleacht","liosta","notai","scor"];
+document.getElementById("nav").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-tab]"); if(!b) return;
+  TABS.forEach(function(t){document.getElementById(t).hidden=(t!==b.dataset.tab);});
+  Array.prototype.forEach.call(this.querySelectorAll("button"),function(x){x.setAttribute("aria-selected",String(x===b));});
+  if(b.dataset.tab==="scor") drawScore();
+  window.scrollTo(0,0);
+});
+
+/* ================= CLEACHTADH ================= */
+var sel={}; KEYS.forEach(function(k){sel[k]=true;});
+(function(){
+  var box=document.getElementById("tChips");
+  var all=document.createElement("button");
+  all.className="chip"; all.id="chipAll"; all.textContent="Uile"; all.setAttribute("aria-pressed","true");
+  box.appendChild(all);
+  KEYS.forEach(function(k){
+    var n=Q.filter(function(x){return x.topic===k;}).length;
+    var b=document.createElement("button");
+    b.className="chip"; b.dataset.k=k; b.setAttribute("aria-pressed","true");
+    b.innerHTML=esc(TOPICS[k].name)+" <span class='ct'>"+n+"</span>";
+    box.appendChild(b);
+  });
+  box.addEventListener("click",function(e){
+    var b=e.target.closest(".chip"); if(!b) return;
+    if(b.id==="chipAll"){
+      var on=b.getAttribute("aria-pressed")!=="true";
+      KEYS.forEach(function(k){sel[k]=on;});
+    } else {
+      sel[b.dataset.k]=!sel[b.dataset.k];
+      if(!KEYS.some(function(k){return sel[k];})) sel[b.dataset.k]=true;
+    }
+    syncChips(); startQuiz();
+  });
+})();
+function syncChips(){
+  var on=KEYS.filter(function(k){return sel[k];}).length;
+  document.getElementById("chipAll").setAttribute("aria-pressed",String(on===KEYS.length));
+  Array.prototype.forEach.call(document.querySelectorAll("#tChips .chip[data-k]"),function(b){
+    b.setAttribute("aria-pressed",String(!!sel[b.dataset.k]));});
+}
+
+var qArea=document.getElementById("qArea"), SET=[], qi=0, qr=0, qw=0;
+function pool(){
+  var srcv=document.getElementById("src").value;
+  return Q.filter(function(x){
+    if(!sel[x.topic]) return false;
+    if(srcv==="hw" && !x.hw) return false;
+    if(srcv==="new" && x.hw) return false;
+    return true;
+  });
+}
+function startQuiz(){
+  var p=pool(), len=parseInt(document.getElementById("qLen").value,10);
+  SET=shuffle(p); if(len>0) SET=SET.slice(0,len);
+  qi=0;qr=0;qw=0;
+  document.getElementById("qHint").textContent=
+    p.length+" ceist ar fáil sna hábhair roghnaithe. Ní chuireann poncaíocht ná ceannlitreacha isteach ar an mharcáil.";
+  if(!SET.length){qArea.innerHTML="<div class='panel'><p class='muted'>Níl ceist ar bith ann don roghnú sin.</p></div>";return;}
+  drawQ();
+}
+document.getElementById("qStart").onclick=startQuiz;
+["qLen","strict","src"].forEach(function(id){document.getElementById(id).onchange=startQuiz;});
+
+function drawQ(){
+  if(qi>=SET.length){ endQuiz(); return; }
+  var it=SET[qi];
+  var h="<div class='panel'><div class='meter'><i style='width:"+(qi/SET.length*100)+"%'></i></div>"+
+    "<p class='lbl' style='display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap'>"+
+      "<span>Ceist "+(qi+1)+" / "+SET.length+" · "+esc(tName(it.topic))+(it.hw?" · obair bhaile":"")+"</span>"+
+      sess(qr,qw)+"</p>";
+  if(it.t==="why"){
+    h+="<p class='muted' style='margin:4px 0 2px'>Mínigh gramadach na habairte seo:</p>"+
+       "<p class='ga' style='font-size:1.2rem;margin:0 0 12px'>"+esc(it.q)+"</p>"+
+       "<button class='btn' id='qShow'>Taispeáin an míniú</button>";
+  } else {
+    h+="<p class='ga' style='font-size:1.14rem;margin:4px 0 12px'>"+
+         (it.t==="gap" ? esc(it.q) : "Cuir Gaeilge air: <b>"+esc(it.q)+"</b>")+"</p>"+
+       "<input type='text' id='qIn' autocomplete='off' autocapitalize='off' spellcheck='false' placeholder='"+
+         (it.t==="gap"?"an réamhfhocal…":"scríobh an abairt…")+"'>"+
+       "<div class='row' style='margin-top:10px'><button class='btn' id='qGo'>Seiceáil</button>"+
+       "<button class='btn alt' id='qSkip'>Taispeáin</button></div>";
+  }
+  h+="<div id='qFb'></div></div>";
+  qArea.innerHTML=h;
+  if(it.t==="why"){
+    document.getElementById("qShow").onclick=function(){ revealWhy(it); };
+  } else {
+    var inp=document.getElementById("qIn"); inp.focus();
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter"){e.preventDefault();judge(it,inp.value,false);} });
+    document.getElementById("qGo").onclick=function(){judge(it,inp.value,false);};
+    document.getElementById("qSkip").onclick=function(){judge(it,"",true);};
+  }
+}
+function tail(it){
+  var all=[it.a].concat(it.alts||[]);
+  return (all.length>1?"<p class='muted' style='margin:6px 0 0'>Leaganacha eile inghlactha: "+all.slice(1).map(esc).join(" · ")+"</p>":"")+
+    (it.why?"<div class='note'><b>Cén fáth:</b> "+esc(it.why)+"</div>":"")+
+    (it.flag?"<div class='flag'><b>Le seiceáil:</b> "+esc(it.flag)+"</div>":"");
+}
+function revealWhy(it){
+  document.getElementById("qShow").disabled=true;
+  document.getElementById("qFb").innerHTML=
+    "<div class='fb w'>An míniú:</div><p style='margin:8px 0 0'>"+esc(it.a)+"</p>"+tail(it)+
+    "<div class='row' style='margin-top:12px'>"+
+    "<button class='btn' id='wYes'>Bhí sin agam</button>"+
+    "<button class='btn alt' id='wNo'>Ní raibh</button></div>";
+  document.getElementById("wYes").onclick=function(){ rec(it.id,true); qr++; drawStats(); qi++; drawQ(); };
+  document.getElementById("wNo").onclick=function(){ rec(it.id,false); qw++; drawStats(); qi++; drawQ(); };
+}
+function judge(it,given,reveal){
+  var res = reveal ? {v:"no"} : check(given,it);
+  var strictMode = document.getElementById("strict").value==="hard";
+  var credit = res.v==="ok" || (res.v==="near" && !strictMode);
+  if(!reveal){ rec(it.id,credit); if(credit) qr++; else qw++; drawStats(); }
+  var cls = res.v==="ok" ? "y" : (res.v==="near" ? "w" : "n");
+  var head, body="";
+  if(res.v==="ok"){ head="Ceart."; }
+  else if(res.v==="near"){
+    head = (res.why==="fada"
+      ? (strictMode?"Beagnach — na sínte fada ar iarraidh.":"Beagnach, agus glactha leis — na sínte fada ar iarraidh.")
+      : (strictMode?"Beagnach — botún litrithe.":"Beagnach, agus glactha leis — botún litrithe."));
+    body="<p style='margin:6px 0 0'>An freagra: <b class='ga'>"+esc(res.match)+"</b></p>"+slipHTML(res.slips);
+  } else {
+    head = reveal ? "Freagra:" : "Ní raibh sin ceart.";
+    body = "<p style='margin:6px 0 0'><b class='ga'>"+esc(it.a)+"</b></p>";
+  }
+  document.getElementById("qFb").innerHTML="<div class='fb "+cls+"'>"+head+"</div>"+body+tail(it)+
+    "<div class='row' style='margin-top:12px'><button class='btn' id='qNext'>Ar aghaidh</button>"+
+    (!credit&&!reveal?"<button class='btn alt' id='qMine'>Bhí mo cheann ceart</button>":"")+"</div>";
+  Array.prototype.forEach.call(qArea.querySelectorAll("#qGo,#qSkip,#qIn"),function(el){el.disabled=true;});
+  var sb=qArea.querySelector(".sess"); if(sb) sb.outerHTML=sess(qr,qw);
+  document.getElementById("qNext").onclick=function(){qi++;drawQ();};
+  var m=document.getElementById("qMine");
+  if(m) m.onclick=function(){
+    var x=S.items[it.id]; x.no--; x.ok++; S.wrong=Math.max(0,S.wrong-1); S.right++;
+    qw--; qr++; save(); drawStats(); qi++; drawQ();
+  };
+  document.getElementById("qNext").focus();
+}
+function endQuiz(){
+  var by={};
+  SET.forEach(function(it){ by[it.topic]=by[it.topic]||0; by[it.topic]++; });
+  var pc=SET.length?Math.round(qr/SET.length*100):0;
+  qArea.innerHTML="<div class='panel' style='text-align:center'><p class='lbl'>Críochnaithe</p>"+
+    "<p class='big'>"+qr+" / "+SET.length+"</p><p class='muted'>"+pc+"%</p>"+
+    "<div class='row' style='justify-content:center;margin-top:12px'>"+
+    "<button class='btn' id='qAgain'>Arís</button>"+
+    "<button class='btn alt' id='qScore'>Féach ar an scór</button></div></div>";
+  document.getElementById("qAgain").onclick=startQuiz;
+  document.getElementById("qScore").onclick=function(){
+    TABS.forEach(function(t){document.getElementById(t).hidden=(t!=="scor");});
+    Array.prototype.forEach.call(document.querySelectorAll("#nav button"),function(x){
+      x.setAttribute("aria-selected",String(x.dataset.tab==="scor"));});
+    drawScore(); window.scrollTo(0,0);
+  };
+}
+
+/* ================= CEISTEANNA (browse) ================= */
+var fq=document.getElementById("fQ"), fsel="", fList=document.getElementById("fList");
+(function(){
+  var box=document.getElementById("fChips");
+  var mk=function(k,label,n){
+    var b=document.createElement("button"); b.className="chip"; b.dataset.k=k;
+    b.innerHTML=esc(label)+(n?" <span class='ct'>"+n+"</span>":"");
+    b.setAttribute("aria-pressed",String(k===""));
+    box.appendChild(b);
+  };
+  mk("","Uile",Q.length);
+  mk("hw","Obair bhaile",Q.filter(function(x){return x.hw;}).length);
+  KEYS.forEach(function(k){ mk(k,TOPICS[k].name,Q.filter(function(x){return x.topic===k;}).length); });
+  box.addEventListener("click",function(e){
+    var b=e.target.closest(".chip"); if(!b) return;
+    fsel=b.dataset.k;
+    Array.prototype.forEach.call(box.querySelectorAll(".chip"),function(x){x.setAttribute("aria-pressed",String(x===b));});
+    drawList();
+  });
+})();
+fq.addEventListener("input",drawList);
+function drawList(){
+  var s=norm(fq.value);
+  var list=Q.filter(function(x){
+    if(fsel==="hw"){ if(!x.hw) return false; }
+    else if(fsel && x.topic!==fsel) return false;
+    if(!s) return true;
+    return norm(x.q).indexOf(s)>-1||norm(x.a).indexOf(s)>-1||(x.why&&norm(x.why).indexOf(s)>-1);
+  });
+  document.getElementById("fCount").textContent=list.length+" ceist";
+  if(!list.length){ fList.innerHTML="<p class='muted'>Gan toradh.</p>"; return; }
+  fList.innerHTML=list.map(function(x){
+    return "<div class='ent'><div class='hdr'>"+
+      "<span class='q'>"+(x.t==="gap"?"<span class='ga'>"+esc(x.q)+"</span>":esc(x.q))+"</span>"+
+      "<span class='tag"+(x.hw?" hw":"")+"'>"+esc(x.hw?"obair bhaile":tName(x.topic))+"</span></div>"+
+      "<div class='a'>"+esc(x.a)+"</div>"+
+      (x.why?"<div class='note' hidden>"+esc(x.why)+"</div>":"")+
+      (x.flag?"<div class='flag' hidden>"+esc(x.flag)+"</div>":"")+
+      "</div>";
+  }).join("");
+}
+fList.addEventListener("click",function(e){
+  var h=e.target.closest(".ent"); if(!h) return;
+  Array.prototype.forEach.call(h.querySelectorAll(".note,.flag"),function(el){el.hidden=!el.hidden;});
+});
+drawList();
+
+/* ================= NÓTAÍ ================= */
+document.getElementById("nList").innerHTML = NOTAI.map(function(n,i){
+  return "<details"+(i===0?" open":"")+"><summary>"+esc(n.title)+"<span class='s'>"+esc(n.sub)+"</span></summary>"+
+    "<div>"+n.html.replace(/<table>/g,"<div class='tw'><table>").replace(/<\/table>/g,"</table></div>")+"</div></details>";
+}).join("");
+
+/* ================= SCÓR ================= */
+function drawScore(){
+  var rows=KEYS.map(function(k){
+    var items=Q.filter(function(x){return x.topic===k;});
+    var ok=0,no=0,seen=0;
+    items.forEach(function(x){ var s=S.items[x.id]; if(s){seen++; ok+=s.ok; no+=s.no;} });
+    var tot=ok+no;
+    return {k:k, n:items.length, seen:seen, ok:ok, no:no, pc: tot?Math.round(ok/tot*100):null};
+  });
+  var anyTried = rows.some(function(r){return r.ok+r.no>0;});
+  var h="<h2>Scór de réir ábhair</h2><div class='panel'>";
+  if(!anyTried) h+="<p class='muted'>Níl ceist ar bith freagartha agat go fóill. Tosaigh ar an táb <b>Cleachtadh</b> agus líonfaidh an leathanach seo é féin.</p>";
+  rows.forEach(function(r){
+    var col = r.pc===null ? "var(--line)" : (r.pc>=80?"var(--ok)":(r.pc>=55?"var(--warn)":"var(--no)"));
+    h+="<div class='bar'><div class='nm'>"+esc(TOPICS[r.k].name)+"<span>"+esc(TOPICS[r.k].en)+"</span></div>"+
+       "<div class='tr'><i style='width:"+(r.pc===null?0:r.pc)+"%;background:"+col+"'></i></div>"+
+       "<div class='pc'>"+(r.pc===null?"—":r.pc+"%")+" <span class='m'>"+r.seen+"/"+r.n+"</span></div></div>";
+  });
+  h+="</div>";
+
+  var weak=Q.filter(function(x){var s=S.items[x.id];return s&&s.no>s.ok;});
+  h+="<h2>Le hathdhéanamh <span class='muted'>("+weak.length+")</span></h2><div class='panel'>";
+  if(!weak.length) h+="<p class='muted'>Níl locht ar bith agat fós.</p>";
+  else h+=weak.slice(0,40).map(function(x){
+    return "<div class='ent'><div class='hdr'><span class='q'>"+
+      (x.t==="gap"?"<span class='ga'>"+esc(x.q)+"</span>":esc(x.q))+
+      "</span><span class='tag'>"+esc(tName(x.topic))+"</span></div><div class='a'>"+esc(x.a)+"</div></div>";
+  }).join("");
+  h+="</div>";
+
+  h+="<div class='panel'><p class='muted' style='margin:0 0 10px'>Glanann sé seo gach scór agus gach locht. Ní féidir é a chur ar ais.</p>"+
+     "<button class='btn alt sm' id='wipe' style='color:var(--no);border-color:var(--no)'>Glan an dul chun cinn ar fad</button></div>";
+  h+="<p class='src'>Foinsí: bileoga obair bhaile IRS139. Tá "+Q.filter(function(x){return x.hw;}).length+
+     " cheist díreach ó na bileoga agus "+Q.filter(function(x){return !x.hw;}).length+" curtha leo mar chleachtadh breise.</p>";
+  document.getElementById("sList").innerHTML=h;
+  document.getElementById("wipe").onclick=function(){
+    if(!window.confirm("Gach scór a ghlanadh?")) return;
+    S={items:{},day:today(),right:0,wrong:0}; save(); drawStats(); drawScore();
+  };
+}
+
+drawStats();
+syncChips();
+startQuiz();
+})();
+</script>
+</body>
+</html>
